@@ -1,0 +1,336 @@
+$toggle-h: 1.5rem;
+$toggle-w: 3rem;
+$thumb-size: $toggle-h * 1.1;
+
+$crater1-w: 0.41;
+$crater1-h: 0.36;
+$crater2-w: 0.38;
+$crater2-h: 0.4;
+$crater3-w: 0.21;
+$crater3-h: 0.15;
+
+$wave-size: $thumb-size * 0.35;
+$star-size: 0.06rem;
+
+$ocean-color: #40b5f8;
+
+:root {
+    //day
+    --thumb-color: #ffcc33;
+    --toggle-h: #{$toggle-h};
+    --toggle-w: #{$toggle-w};
+    --thumb-size: #{$thumb-size};
+
+    --crater1-w: #{$crater1-w};
+    --crater1-h: #{$crater1-h};
+    --crater2-w: #{$crater2-w};
+    --crater2-h: #{$crater2-h};
+    --crater3-w: #{$crater3-w};
+    --crater3-h: #{$crater3-h};
+
+    --wave-size: #{$wave-size};
+    --star-size: #{$star-size};
+}
+
+.container {
+    
+    position: relative;
+    background: #d6e7f7;
+    font-family: 'Pacifico', cursive;
+    will-change: color;
+    user-select: none;
+
+    .inspired-by {
+        &-day {
+            left: 0;
+        }
+        &-night {
+            font-family: 'Staatliches', cursive;
+            letter-spacing: 0.1rem;
+            color: #fff;
+            left: -$toggle-w * 2;
+            opacity: 0;
+        }
+    }
+
+    &.nighttime {
+        background-color: #151d29;
+        .inspired-by-night {
+        }
+        A {
+            box-shadow: none;
+        }
+    }
+
+    P {
+        color: #000;
+        font-size: 0.17rem;
+        height: 0.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(var(--toggle-h) * 1.5);
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        text-shadow: 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 1);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        a {
+            color: gold;
+            margin-left: 0.5rem;
+            text-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.5);
+        }
+    }
+    @media (max-width: 849px) {
+        $toggle-h: $toggle-h/2;
+        $toggle-w: $toggle-w/2;
+        $thumb-size: $thumb-size/2;
+        $wave-size: $wave-size/2;
+        $star-size: $star-size/2;
+        --toggle-h: #{$toggle-h};
+        --toggle-w: #{$toggle-w};
+        --thumb-size: #{$thumb-size};
+        --wave-size: #{$wave-size};
+
+        --star-size: #{$star-size};
+
+        .toggle-thumb {
+            transition: 1s all ease-in-out;
+        }
+    }
+}
+
+.toggle {
+    &-wrapper {
+        position: absolute;
+        width: $toggle-w;
+        width: var(--toggle-w, #{$toggle-w});
+        height: $toggle-h;
+        height: var(--toggle-h, #{$toggle-h});
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        border-radius: $toggle-h;
+        border-radius: var(--toggle-h, #{$toggle-h});
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 1s all ease-in-out;
+    }
+    &-container {
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        height: 50%;
+        border-radius: $toggle-h;
+        border-radius: var(--toggle-h, #{$toggle-h});
+    }
+    &-thumb {
+        border-radius: 50%;
+        position: absolute;
+        z-index: 10;
+        background: #d8831b;
+        border: 2px solid #fff;
+        padding: 2px;
+        left: -0.6rem;
+        transform: rotate(-270deg);
+        transition: 1s all ease-in-out;
+    }
+    &-day,
+    &-night {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        border-radius: $toggle-h;
+        border-radius: var(--toggle-h, #{$toggle-h});
+        overflow: hidden;
+        background-color: #a0a0a7;
+        transition: 1s all ease-in-out;
+    }
+    &-day {
+        left: 0;
+        opacity: 1;
+        transition: 1s all ease-in-out;
+        .waves {
+            $wave-no: 7;
+            list-style: none;
+            height: 100%;
+            width: 100%;
+            background: $ocean-color;
+            position: absolute;
+            //top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            white-space: nowrap;
+            text-align: right;
+            transition: 1s all ease-in-out;
+            li {
+                width: $wave-size;
+                width: var(--wave-size);
+                height: 80%;
+                border-radius: 0 0 var(--wave-size) var(--wave-size);
+                display: inline-block;
+                background: red;
+                position: relative;
+                margin: 0 -1rem;
+                margin: 0 calc(var(--wave-size) / -10);
+                background: linear-gradient(
+                    to bottom,
+                    #99ccff 0%,
+                    #ffffff 100%
+                );
+                transition: 1s all ease-in-out;
+            }
+        }
+        .surfer {
+            width: 0.35rem;
+            height: 0.35rem;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/66763/surfer1.png);
+            background-size: cover;
+            position: absolute;
+            right: 30%;
+            bottom: 40%;
+            z-index: 10;
+            //transform: scale(-1, 1)
+        }
+    }
+    &-night {
+        left: calc(calc(100% - calc(var(--thumb-size) - 0.06rem)) * -1);
+        // background: linear-gradient(to bottom, #003333 0%, #6666cc 100%);
+        background-color: #a0a0a7;
+        opacity: 0;
+        transition: 1s all ease-in-out;
+        .astronaut {
+            width: 0.46rem;
+            height: 0.35rem;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/66763/astronaut.png);
+            background-size: cover;
+            position: absolute;
+            left: -5%;
+            bottom: 5%;
+            z-index: 10;
+            transform: rotate(-360deg);
+        }
+        .stars {
+            //background: red;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            li {
+                width: $star-size;
+                width: var(--star-size);
+                height: $star-size;
+                height: var(--star-size);
+                background: #e7dec7;
+                position: absolute;
+                transform: rotate(45deg) translateY(-10000%) translateX(-5000%);
+                &:nth-child(1) {
+                    top: 18%;
+                    left: 23.6%;
+                    opacity: 1;
+                }
+                &:nth-child(2) {
+                    top: 32.8%;
+                    left: 11.6%;
+                    opacity: 0.8;
+                }
+                &:nth-child(3) {
+                    top: 28%;
+                    left: 41.6%;
+                    opacity: 0.8;
+                }
+                &:nth-child(4) {
+                    top: 47.8%;
+                    left: 35.6%;
+                    opacity: 0.6;
+                }
+                &:nth-child(5) {
+                    top: 58%;
+                    left: 19.6%;
+                    opacity: 0.6;
+                }
+                &:nth-child(6) {
+                    top: 68%;
+                    left: 47.6%;
+                    opacity: 0.4;
+                }
+                &:nth-child(7) {
+                    top: 73%;
+                    left: 7.6%;
+                    opacity: 0.2;
+                }
+                &:nth-child(8) {
+                    top: 78%;
+                    left: 29.5%;
+                    opacity: 0.2;
+                }
+            }
+        }
+    }
+    &-checkbox {
+        display: none;
+        &:checked {
+            & + .toggle-wrapper {
+                .toggle-thumb {
+                    transform: rotate(0);
+                    left: calc(100% - calc(#{$thumb-size} - 0.6rem));
+                    left: calc(100% - calc(var(--thumb-size) - 0.6rem));
+                    background-color: #333;
+                    color: #fff;
+                    .crater-1,
+                    .crater-2,
+                    .crater-3 {
+                        opacity: 1;
+                    }
+                }
+                .toggle-day {
+                    //day not visible
+                    left: calc(100% - calc(var(--thumb-size) - 0.6rem));
+                    opacity: 0;
+                    .surfer {
+                        bottom: -100%;
+                    }
+                    .waves {
+                        height: 200%;
+                        bottom: -100%;
+                    }
+                }
+                .toggle-night {
+                    //night visible
+                    left: 0;
+                    opacity: 1;
+                    .astronaut {
+                        left: 25%;
+                        bottom: 35%;
+                        z-index: 10;
+                        transform: rotate(15deg);
+                    }
+                    .stars li {
+                        transform: rotate(45deg);
+                    }
+                    transition: 1s all ease-in-out;
+                }
+            }
+            & ~ .inspired-by {
+                &-day {
+                    left: $toggle-w * 2;
+                    opacity: 0;
+                }
+                &-night {
+                    left: 0;
+                    opacity: 1;
+                }
+                transition: 1s all ease-in-out;
+            }
+        }
+    }
+}
